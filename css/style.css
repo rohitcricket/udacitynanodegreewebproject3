@@ -1,0 +1,39 @@
+body {
+	text-align: center;
+}
+
+.water-block{
+	background-position: 0 0;
+	width: 101px;
+	height: 171px;
+}
+
+.legend{
+	font-size: 20px;
+	color: #FFFFFF;
+	border-style: solid;
+	padding: 5px;
+	background-color: #3399FF;
+    border-width: 1px;
+    box-shadow: 10px 10px 5px #888888;
+}
+
+#lives{
+	font-size: 20px;
+	color: #B00000;
+	border-style: solid;
+	padding: 5px;
+	background-color: #3399FF;
+    border-width: 1px;
+    box-shadow: 10px 10px 5px #888888;
+}
+
+#name{
+	font-size: 32px;
+	color: #FFFFFF;
+	border-style: solid;
+	padding: 5px;
+	background-color: #3399FF;
+    border-width: 1px;
+    box-shadow: 10px 10px 5px #888888;
+}
