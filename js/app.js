@@ -17,16 +17,16 @@ var level = 0;
 var gemsCollected = 0;
 
 // Enemies our player must avoid
-var Enemy = function(x,y,speed) { 
+var Enemy = function(x,y) { 
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    this.x = -100;
-    this.y = 100 *(Math.floor(Math.random()*4));
-    this.speed = 100 *(Math.floor(Math.random()*4));
+    this.x = x;
+    this.y = y;
+    this.speed = 150 *(Math.floor(Math.random()*4));;
 }
 
 // Update the enemy's position, required method for game
@@ -57,6 +57,7 @@ var Player = function() {
     this.x = 20 + 120*(Math.floor(Math.random()*4)); //randomize x position
     this.y = 350;
     this.speed = 10;
+    //console.log(this.speed);
 }
 
 // Update the players's position, required method for game
@@ -67,6 +68,11 @@ Player.prototype.update = function(dt) {
     // all computers.
     this.x * (dt);
     this.y * (dt);
+
+    // Reset player when it reaches the water
+    if (this.y === -10) {
+        player.reset();
+    }
 }
 
 
@@ -75,6 +81,12 @@ Player.prototype.update = function(dt) {
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
+
+// Reset the player when it loses life or reaches goals.
+//Player.prototype.reset = function() {
+//    this.x = 100;
+//    this.y = 450;
+//}
 
 // Draw the Princess
 
@@ -85,8 +97,8 @@ var Princess = function() {
     // The image/sprite for our players, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/char-princess-girl.png';
-    this.x = 200;
-    this.y = 30;
+    this.x = 20 + 120*(Math.floor(Math.random()*4));
+    this.y = 100 + 50*(Math.floor(Math.random()*4));
     this.speed = 10;
 }
 
@@ -106,6 +118,7 @@ Princess.prototype.render = function() {
 }
 // End draw the Princess
 
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
@@ -113,9 +126,9 @@ Princess.prototype.render = function() {
 var player = new Player();
 var princess = new Princess();
 
-var Darth = new Enemy(-100,50,20);
-var Vader = new Enemy(-100,200,400);
-var Joker = new Enemy(-100,350, 150);
+var Darth = new Enemy(-100,60);
+var Vader = new Enemy(-100,140);
+var Joker = new Enemy(-100,220);
 allEnemies = [Darth, Vader, Joker];
 
 // This listens for key presses and sends the keys to your
@@ -134,18 +147,18 @@ document.addEventListener('keyup', function(e) {
 // This function is for moving the player.
 
 Player.prototype.handleInput = function(key) {
-    if (key === 'left') {
-        this.x -= this.x;
+    if (key === 'left' && this.x > 0) {
+        this.x -= 100;
     }
 
-    else if (key === 'right') {
-        this.x += this.x;
+    else if (key === 'right' && this.x < 395) {
+        this.x += 100;
     }
-    else if (key === 'up') {
-        this.y -= this.y;
+    else if (key === 'up' && this.y > 40) {
+        this.y -= 100;
     }
 
-    else if (key === 'down') {
-        this.y += this.y;
+    else if (key === 'down' && this. y < 600) {
+        this.y += 100;
     }
 }

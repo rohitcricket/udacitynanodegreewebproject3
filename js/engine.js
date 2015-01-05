@@ -102,29 +102,33 @@ var Engine = (function(global) {
 
     function checkCollisions() {
         //check collision with walls
-
-        if (Player.x < 0)
-            Player.x = 0;
-        if (Player.y < 0)
-            Player.y = 0;
-        if (Player.x + Player.width > canvas.width)
-            Player.x = canvas.width - Player.width;
-        if (Player.y + Player.height > canvas.height)
-            Player.y = canvas.height - Player.height;
+/*
+        if (player.x < 0)
+            player.x = 0;
+        if (player.y < 0)
+            player.y = 0;
+        if (player.x + player.width > canvas.width)
+            player.x = canvas.width - player.width;
+        if (player.y + player.height > canvas.height)
+            player.y = canvas.height - player.height;
+*/
 
         //check collision with enemies
-        if (Player.y > allEnemies.y && Player.y < allEnemies.y + allEnemies.height) {
-            if (Player.x < allEnemies.x)
-                Player.x = allEnemies.x - Player.width;
-            else if (Player.x > allEnemies.x)
-                Player.x = allEnemies.x + allEnemies.width;
+        for (var enemy in allEnemies) {
+            if (player.y > allEnemies[enemy].y && player.y < allEnemies[enemy].y + allEnemies[enemy].height) {
+                if (player.x < allEnemies[enemy].x)
+                    player.x = allEnemies[enemy].x - player.width;
+                else if (player.x > allEnemies[enemy].x)
+                    player.x = allEnemies[enemy].x + allEnemies[enemy].width;
+            }
+            else if (player.x > allEnemies[enemy].x && player.x < allEnemies[enemy].x + allEnemies[enemy].width) {
+                if (player.y < allEnemies[enemy].y)
+                    player.y = allEnemies[enemy].y - player.height;
+                else if (player.y > allEnemies[enemy].y)
+                    player.y = allEnemies[enemy].y + allEnemies[enemy].height;  
+            }
         }
-        else if (Player.x > allEnemies.x && Player.x < allEnemies.x + allEnemies.width) {
-            if (Player.y < allEnemies.y)
-                Player.y = allEnemies.y - Player.height;
-            else if (Player.y > allEnemies.y)
-                Player.y = allEnemies.y + allEnemies.height;  
-        }
+
     }
 
 
@@ -194,7 +198,8 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        // noop
+        player.x = 100;
+        player.y = 400;
     }
 
     /* Go ahead and load all of the images we know we're going to need to
