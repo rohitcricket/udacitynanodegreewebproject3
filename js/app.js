@@ -57,7 +57,6 @@ var Player = function() {
     this.x = 20 + 120*(Math.floor(Math.random()*4)); //randomize x position
     this.y = 350;
     this.speed = 10;
-    //console.log(this.speed);
 }
 
 // Update the players's position, required method for game
@@ -70,8 +69,9 @@ Player.prototype.update = function(dt) {
     this.y * (dt);
 
     // Reset player when it reaches the water
-    if (this.y === -10) {
+    if (this.y <= 0) {
         player.reset();
+        level = level + 1;
     }
 }
 
@@ -83,10 +83,10 @@ Player.prototype.render = function() {
 }
 
 // Reset the player when it loses life or reaches goals.
-//Player.prototype.reset = function() {
-//    this.x = 100;
-//    this.y = 450;
-//}
+Player.prototype.reset = function() {
+    this.x = 100;
+    this.y = 400;
+}
 
 // Draw the Princess
 
@@ -148,17 +148,17 @@ document.addEventListener('keyup', function(e) {
 
 Player.prototype.handleInput = function(key) {
     if (key === 'left' && this.x > 0) {
-        this.x -= 100;
+        this.x -= 101;
     }
 
     else if (key === 'right' && this.x < 395) {
-        this.x += 100;
+        this.x += 101;
     }
-    else if (key === 'up' && this.y > 40) {
-        this.y -= 100;
+    else if (key === 'up' && this.y > 0) {
+        this.y -= 83;
     }
 
-    else if (key === 'down' && this. y < 600) {
-        this.y += 100;
+    else if (key === 'down' && this. y < 400) {
+        this.y += 83;
     }
 }
