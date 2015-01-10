@@ -72,9 +72,11 @@ Player.prototype.update = function(dt) {
     if (this.y <= 0) {
         player.reset();
         level = level + 1;
+        score = score + 10;
+        document.getElementById("level").innerHTML = "Level: " + level;
+        document.getElementById("score").innerHTML = "Score: " + score;
     }
 }
-
 
 
 // Draw the player on the screen, required method for game
@@ -86,6 +88,12 @@ Player.prototype.render = function() {
 Player.prototype.reset = function() {
     this.x = 100;
     this.y = 400;
+}
+
+// Player loses life
+Player.prototype.lives = function() {
+    lives = lives - 1;
+    document.getElementById("lives").innerHTML = "Lives left: " + lives;
 }
 
 // Draw the Princess

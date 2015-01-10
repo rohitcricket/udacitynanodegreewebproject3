@@ -94,60 +94,25 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
-        player.update();
-        princess.update();
+        player.update(dt); //added dt as variable
+        princess.update(dt);
     }
 
     // This function checks collision of entities 
 
     function checkCollisions() {
-        //check collision with walls
-/*
-        if (player.x < 0)
-            player.x = 0;
-        if (player.y < 0)
-            player.y = 0;
-        if (player.x + player.width > canvas.width)
-            player.x = canvas.width - player.width;
-        if (player.y + player.height > canvas.height)
-            player.y = canvas.height - player.height;
-
-                    for (var enemy=0; enemy < allEnemies.length; enemy++) {
-            if (player.y > allEnemies[enemy].y && player.y < allEnemies[enemy].y + allEnemies[enemy].height) {
-                if (player.x < allEnemies[enemy].x)
-                    player.x = allEnemies[enemy].x - player.width;
-                else if (player.x > allEnemies[enemy].x)
-                    player.x = allEnemies[enemy].x + allEnemies[enemy].width;
-            }
-            else if (player.x > allEnemies[enemy].x && player.x < allEnemies[enemy].x + allEnemies[enemy].width) {
-                if (player.y < allEnemies[enemy].y)
-                    player.y = allEnemies[enemy].y - player.height;
-                else if (player.y > allEnemies[enemy].y)
-                    player.y = allEnemies[enemy].y + allEnemies[enemy].height;  
-            }
-        }
-*/
-
+ 
         //check collision with enemies
         for (var enemy=0; enemy < allEnemies.length; enemy++) {
-            if (player.y > allEnemies[enemy].y && player.y < allEnemies[enemy].y + 85) {
-                if (player.x < allEnemies[enemy].x)
-                    player.x = allEnemies[enemy].x - 50;
-                else if (player.x > allEnemies[enemy].x)
-                    player.x = allEnemies[enemy].x + 50;
-            }
-            else if (player.x > allEnemies[enemy].x && player.x < allEnemies[enemy].x + 50) {
-                if (player.y < allEnemies[enemy].y)
-                    player.y = allEnemies[enemy].y - 85;
-                else if (player.y > allEnemies[enemy].y)
-                    player.y = allEnemies[enemy].y + 85;  
-            }
+            if (player.x < allEnemies[enemy].x + 50 && player.x + 50 > allEnemies[enemy].x &&
+                player.y < allEnemies[enemy].y + 50 && player.y + 50 > allEnemies[enemy].y ){
+                    player.reset();
+                    player.lives();
+                }
+            
         }
 
     }
-
-
-
 
     /* This function initially draws the "game level", it will then call
      * the renderEntities function. Remember, this function is called every
@@ -167,8 +132,8 @@ var Engine = (function(global) {
                 'images/grass-block.png',   // Row 1 of 2 of grass
                 'images/grass-block.png'    // Row 2 of 2 of grass
             ],
-            numRows = 6,
-            numCols = 5,
+            numRows = 6, 
+            numCols = 5, 
             row, col;
 
         /* Loop through the number of rows and columns we've defined above
