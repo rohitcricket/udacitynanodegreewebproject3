@@ -176,7 +176,7 @@ var Engine = (function(global) {
         });
 
         player.render();
-        if (level > 3) {
+        if (level > 4) {
             princess.render();
         }
         

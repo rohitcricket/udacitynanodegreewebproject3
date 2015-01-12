@@ -1,8 +1,9 @@
+
 body {
 	text-align: center;
 }
 
-#bg { 	/* added background image */
+#bg {
 	position: fixed; 
 	top: 0; 
 	left: 0; 
@@ -13,6 +14,15 @@ body {
 	min-width: 100%;
 	min-height: 100%;
 }
+
+
+#music { 
+	position: relative;
+	top: 350px;
+	left: -450px;
+}
+
+
 
 .water-block{
 	background-position: 0 0;
@@ -48,4 +58,13 @@ body {
 	background-color: #3399FF;
 	border-width: 1px;
 	box-shadow: 10px 10px 5px #888888;
+}
+
+button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+#stop {
+  left: 100px;
 }
