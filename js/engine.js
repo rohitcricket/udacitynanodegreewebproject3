@@ -112,6 +112,12 @@ var Engine = (function(global) {
             
         }
 
+        //check collision with princess
+            if (player.x < princess.x + 50 && player.x + 50 > princess.x &&
+                player.y < princess.y + 50 && player.y + 50 > princess.y ){
+                    player.water();
+                    score = score + 1000;
+                }
     }
 
     /* This function initially draws the "game level", it will then call
@@ -170,7 +176,10 @@ var Engine = (function(global) {
         });
 
         player.render();
-        princess.render();
+        if (level > 3) {
+            princess.render();
+        }
+        
     }
 
     /* This function does nothing but it could have been a good place to
