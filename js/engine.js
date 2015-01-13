@@ -96,6 +96,7 @@ var Engine = (function(global) {
         });
         player.update(dt); //added dt as variable
         princess.update(dt);
+        gems.update(dt);
     }
 
     // This function checks collision of entities 
@@ -116,7 +117,14 @@ var Engine = (function(global) {
             if (player.x < princess.x + 50 && player.x + 50 > princess.x &&
                 player.y < princess.y + 50 && player.y + 50 > princess.y ){
                     player.water();
-                    score = score + 1000;
+                    score = score + 500;
+                }
+
+        //check collision with Gems
+            if (player.x < gems.x + 50 && player.x + 50 > gems.x &&
+                player.y < gems.y + 50 && player.y + 50 > gems.y ){
+                    player.water();
+                    score = score + 50;
                 }
     }
 
@@ -176,8 +184,12 @@ var Engine = (function(global) {
         });
 
         player.render();
-        if (level > 4) {
+        if (level > 1) {
             princess.render();
+        }
+
+        if (level > 1) {
+            gems.render();
         }
         
     }
@@ -200,6 +212,7 @@ var Engine = (function(global) {
         'images/grass-block.png',
         'images/enemy-bug.png',
         'images/char-boy.png',
+        'images/Gem Orange.png',
         'images/char-princess-girl.png'
     ]);
     Resources.onReady(init);
