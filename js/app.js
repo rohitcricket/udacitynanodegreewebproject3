@@ -9,12 +9,17 @@
 // and the gem disappearing.
 // The game resets everytime the player collides with an enemy or when it reaches the water.
 
+// Set Game start and stop features by calling the global Engine variable
+//var Engine.fps = 50;
+
+//var Engine.intervalId = setInterval(Engine, 1000 / Engine.fps);
+//clearInterveval(Engine.intervalId);
 
 // Initialize game variables 
+
 var score = 0;
 var lives = 3;
 var level = 0;
-var gemsCollected = 0;
 
 // Enemies our player must avoid
 var Enemy = function(x,y,speed) { 
@@ -151,8 +156,8 @@ var Gems = function() {
     // The image/sprite for our players, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/Gem Orange.png';
-    this.x = 20 + 120*(Math.floor(Math.random()*4));
-    this.y = 100 + 50*(Math.floor(Math.random()*4));
+    this.x = 300;
+    this.y = 150;
 }
 
 // Update the gems's position, required method for game
@@ -182,8 +187,8 @@ var gems = new Gems();
 var Darth = new Enemy(-100,60,250); 
 var Vader = new Enemy(-100,180,400);
 var Joker = new Enemy(-100,240,150);
-var Spectre = new Enemy(-100,120,300);
-allEnemies = [Darth, Vader, Joker, Spectre];
+var Specter = new Enemy(-100,120,300);
+allEnemies = [Darth, Vader, Joker, Specter];
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

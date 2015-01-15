@@ -109,14 +109,16 @@ var Engine = (function(global) {
                 player.y < allEnemies[enemy].y + 50 && player.y + 50 > allEnemies[enemy].y ){
                     player.reset();
                     player.lives();
+                    if (lives < 1) {
+                        reset();
+                    }
                 }
-            
         }
 
         //check collision with princess
             if (player.x < princess.x + 50 && player.x + 50 > princess.x &&
                 player.y < princess.y + 50 && player.y + 50 > princess.y ){
-                    player.water();
+                    player.reset();
                     score = score + 500;
                 }
 
@@ -184,6 +186,7 @@ var Engine = (function(global) {
         });
 
         player.render();
+
         if (level > 1) {
             princess.render();
         }
@@ -191,7 +194,7 @@ var Engine = (function(global) {
         if (level > 1) {
             gems.render();
         }
-        
+
     }
 
     /* This function does nothing but it could have been a good place to
@@ -199,7 +202,9 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-
+       level = 0;
+       score = 0;
+       lives = 0;
     }
 
     /* Go ahead and load all of the images we know we're going to need to
