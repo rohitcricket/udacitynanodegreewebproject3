@@ -204,7 +204,7 @@ var Engine = (function(global) {
     function reset() {
        level = 0;
        score = 0;
-       lives = 0;
+       lives = 3;
     }
 
     /* Go ahead and load all of the images we know we're going to need to
