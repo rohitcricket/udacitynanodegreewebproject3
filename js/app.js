@@ -1,19 +1,14 @@
-// GAME DESIGN:
-// Keep scores, change levels, lose lives and collect Gems. Save Princess.
-// Update one level when player reaches water.
-// Player loses one life if it collides with the enemy.
-// Player gets 500 points for saving the pricess, which means a collision with the princess,
-// and both the player and princess together moving as one entity towards the water.
-// Player gets 10 points for completing a level.
-// Player gets 50 points for oollecting gems, which means a collision but with Player not dying, 
-// and the gem disappearing.
-// The game resets everytime the player collides with an enemy or when it reaches the water.
-
-// Set Game start and stop features by calling the global Engine variable
-//var Engine.fps = 50;
-
-//var Engine.intervalId = setInterval(Engine, 1000 / Engine.fps);
-//clearInterveval(Engine.intervalId);
+/* GAME DESIGN:
+ Keep scores, change levels, lose lives and collect Gems. Save Princess.
+ Update one level when player reaches water.
+ Player loses one life if it collides with the enemy.
+ Player gets 500 points for saving the pricess, which means a collision with the princess,
+ and both the player and princess together moving as one entity towards the water.
+ Player gets 10 points for completing a level.
+ Player gets 50 points for oollecting gems, which means a collision but with Player not dying, 
+ and the gem disappearing.
+ The game resets everytime the player collides with an enemy or when it reaches the water.
+*/
 
 // Initialize game variables 
 

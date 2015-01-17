@@ -1,1 +1,1 @@
-//
+Frogger is an arcade game introduced in 1981. This game is a clone of the original game. The object of the game is to direct the player (the prince) safely across the path to the water. To do this, he must avoid the enemies (bugs) while crossing. Skillful players may obtain some bonuses along the way. The game is regarded as a classic from the golden age of video arcade games and was noted for its novel gameplay and theme. This game the prince can collect gems for extra bonus and save the princess from the bugs to collect a large bonus.

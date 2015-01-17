@@ -107,12 +107,15 @@ var Engine = (function(global) {
         for (var enemy=0; enemy < allEnemies.length; enemy++) {
             if (player.x < allEnemies[enemy].x + 50 && player.x + 50 > allEnemies[enemy].x &&
                 player.y < allEnemies[enemy].y + 50 && player.y + 50 > allEnemies[enemy].y ){
-                    player.reset();
-                    player.lives();
-                    if (lives < 1) {
-                        reset();
-                    }
+                player.reset();
+                //   player.lives();
+                lives = lives - 1;
+                document.getElementById("lives").innerHTML = "Lives left: " + lives;
+                if (lives < 0) {
+                    reset();
+                    lives++;
                 }
+            }
         }
 
         //check collision with princess
@@ -202,9 +205,11 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-       level = 0;
-       score = 0;
-       lives = 3;
+        lives = 3;
+        score = 0;
+        level = 0;
+        document.getElementById("level").innerHTML = "Level: " + level;
+        document.getElementById("score").innerHTML = "Score: " + score;
     }
 
     /* Go ahead and load all of the images we know we're going to need to
