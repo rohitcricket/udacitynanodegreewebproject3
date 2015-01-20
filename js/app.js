@@ -123,7 +123,6 @@ var Princess = function() {
     this.sprite = 'images/char-princess-girl.png';
     this.x = 20 + 120*(Math.floor(Math.random()*4));
     this.y = 100 + 50*(Math.floor(Math.random()*4));
-    this.speed = 10;
 }
 
 // Update the princess's position, required method for game
@@ -151,8 +150,8 @@ var Gems = function() {
     // The image/sprite for our players, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/Gem Orange.png';
-    this.x = 300;
-    this.y = 150;
+    this.x = 20 + 120*(Math.floor(Math.random()*4));
+    this.y = 100 + 50*(Math.floor(Math.random()*4));
 }
 
 // Update the gems's position, required method for game
@@ -184,6 +183,7 @@ var Vader = new Enemy(-100,180,400);
 var Joker = new Enemy(-100,240,150);
 var Specter = new Enemy(-100,120,300);
 allEnemies = [Darth, Vader, Joker, Specter];
+
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

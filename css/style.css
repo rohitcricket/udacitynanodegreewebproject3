@@ -15,14 +15,11 @@ body {
 	min-height: 100%;
 }
 
-
 #music { 
 	position: relative;
 	top: 350px;
 	left: -450px;
 }
-
-
 
 .water-block{
 	background-position: 0 0;
@@ -61,10 +58,31 @@ body {
 }
 
 button {
-  position: absolute;
-  top: 20px;
-  left: 20px;
+	position: absolute;
+	top: 20px;
+	left: 20px;
 }
+
+#start {
+	left: 230px;
+	top: 220px;
+	font-size: 20px;
+	color: #FFFFFF;
+	border-style: solid;
+	padding: 5px;
+	background-color: #3399FF;
+	border-width: 1px;
+	box-shadow: 10px 10px 5px #888888;
+}
+
 #stop {
-  left: 100px;
+	left: 330px;
+	top: 220px;
+	font-size: 20px;
+	color: #B00000;
+	border-style: solid;
+	padding: 5px;
+	background-color: #3399FF;
+	border-width: 1px;
+	box-shadow: 10px 10px 5px #888888;
 }

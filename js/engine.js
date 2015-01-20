@@ -56,8 +56,21 @@ var Engine = (function(global) {
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
-        win.requestAnimationFrame(main);
+        //win.requestAnimationFrame(main);
+        // Start and stop code from http://css-tricks.com/using-requestanimationframe/
+        var globalID;
+        $("<div />").appendTo("body");
+           globalID = win.requestAnimationFrame(main);
+        $("#start").on("click", function() {
+            globalID = win.requestAnimationFrame(main);
+        });
+        $("#stop").on("click", function() {
+            cancelAnimationFrame(globalID);
+        });
+        
+
     };
+
 
     /* This function does some initial setup that should only occur once,
      * particularly setting the lastTime variable that is required for the
@@ -131,6 +144,16 @@ var Engine = (function(global) {
                     player.water();
                     score = score + 50;
                 }
+
+/*
+        //check collision of princess with enemies
+        for (var enemy=0; enemy < allEnemies.length; enemy++) {
+            if (princess.x < allEnemies[enemy].x + 50 && princess.x + 50 > allEnemies[enemy].x &&
+                princess.y < allEnemies[enemy].y + 50 && princess.y + 50 > allEnemies[enemy].y ){
+                // princess?
+                }
+        }
+*/
     }
 
     /* This function initially draws the "game level", it will then call
@@ -195,7 +218,7 @@ var Engine = (function(global) {
         }
 
         if (level > 1) {
-            gems.render();
+            gems.render();               
         }
 
     }
