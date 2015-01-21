@@ -13,7 +13,6 @@
  * the canvas' context (ctx) object globally available to make writing app.js
  * a little simpler to work with.
  */
-
 var Engine = (function(global) {
     /* Predefine the variables we'll be using within this scope,
      * create the canvas element, grab the 2D context for that canvas
@@ -28,6 +27,26 @@ var Engine = (function(global) {
     canvas.width = 505;
     canvas.height = 606;
     doc.body.appendChild(canvas);
+
+    /* This is a function to resize the canvas for rendering the game on mobile devices. 
+    Source is at http://cssdeck.com/labs/emcxdwuz
+    */
+    function resize() {
+    // Our canvas must cover full height of screen
+    // regardless of the resolution
+    var height = window.innerHeight;
+    
+    // So we need to calculate the proper scaled width
+    // that should work well with every resolution
+    var ratio = canvas.width/canvas.height;
+    var width = height * ratio;
+    
+    canvas.style.width = width*0.75+'px'; //multiplied by 0.75 to render it better on desktop.
+    canvas.style.height = height*0.75+'px';
+    }
+
+    window.addEventListener('load', resize, false);
+    window.addEventListener('resize', resize, false);
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
@@ -56,8 +75,9 @@ var Engine = (function(global) {
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
-        //win.requestAnimationFrame(main);
+        win.requestAnimationFrame(main);
         // Start and stop code from http://css-tricks.com/using-requestanimationframe/
+        /*
         var globalID;
         $("<div />").appendTo("body");
            globalID = win.requestAnimationFrame(main);
@@ -67,10 +87,8 @@ var Engine = (function(global) {
         $("#stop").on("click", function() {
             cancelAnimationFrame(globalID);
         });
-        
-
+        */
     };
-
 
     /* This function does some initial setup that should only occur once,
      * particularly setting the lastTime variable that is required for the
@@ -115,45 +133,45 @@ var Engine = (function(global) {
     // This function checks collision of entities 
 
     function checkCollisions() {
- 
+
         //check collision with enemies
-        for (var enemy=0; enemy < allEnemies.length; enemy++) {
+        for (var enemy = 0; enemy < allEnemies.length; enemy++) {
             if (player.x < allEnemies[enemy].x + 50 && player.x + 50 > allEnemies[enemy].x &&
-                player.y < allEnemies[enemy].y + 50 && player.y + 50 > allEnemies[enemy].y ){
+                player.y < allEnemies[enemy].y + 50 && player.y + 50 > allEnemies[enemy].y) {
                 player.reset();
                 //   player.lives();
                 lives = lives - 1;
                 document.getElementById("lives").innerHTML = "Lives left: " + lives;
                 if (lives < 0) {
                     reset();
-                    lives++;
+                    //lives++;
                 }
+                document.getElementById("lives").innerHTML = "Lives left: " + lives;
             }
         }
 
         //check collision with princess
-            if (player.x < princess.x + 50 && player.x + 50 > princess.x &&
-                player.y < princess.y + 50 && player.y + 50 > princess.y ){
-                    player.reset();
-                    score = score + 500;
-                }
+        if (player.x < princess.x + 50 && player.x + 50 > princess.x &&
+            player.y < princess.y + 50 && player.y + 50 > princess.y) {
+            player.reset();
+            score = score + 500;
+        }
 
         //check collision with Gems
-            if (player.x < gems.x + 50 && player.x + 50 > gems.x &&
-                player.y < gems.y + 50 && player.y + 50 > gems.y ){
-                    player.water();
-                    score = score + 50;
-                }
-
-/*
-        //check collision of princess with enemies
-        for (var enemy=0; enemy < allEnemies.length; enemy++) {
-            if (princess.x < allEnemies[enemy].x + 50 && princess.x + 50 > allEnemies[enemy].x &&
-                princess.y < allEnemies[enemy].y + 50 && princess.y + 50 > allEnemies[enemy].y ){
-                // princess?
-                }
+        if (player.x < gems.x + 50 && player.x + 50 > gems.x &&
+            player.y < gems.y + 50 && player.y + 50 > gems.y) {
+            player.water();
+            score = score + 50;
         }
-*/
+
+        //check collision of princess with enemies
+        for (var enemy = 0; enemy < allEnemies.length; enemy++) {
+            if (princess.x < allEnemies[enemy].x + 50 && princess.x + 50 > allEnemies[enemy].x &&
+                princess.y < allEnemies[enemy].y + 50 && princess.y + 50 > allEnemies[enemy].y) {
+                princess.reset();
+            }
+        }
+
     }
 
     /* This function initially draws the "game level", it will then call
@@ -167,15 +185,15 @@ var Engine = (function(global) {
          * for that particular row of the game level.
          */
         var rowImages = [
-                'images/water-block.png',   // Top row is water
-                'images/stone-block.png',   // Row 1 of 3 of stone
-                'images/stone-block.png',   // Row 2 of 3 of stone
-                'images/stone-block.png',   // Row 3 of 3 of stone
-                'images/grass-block.png',   // Row 1 of 2 of grass
-                'images/grass-block.png'    // Row 2 of 2 of grass
+                'images/water-block.png', // Top row is water
+                'images/stone-block.png', // Row 1 of 3 of stone
+                'images/stone-block.png', // Row 2 of 3 of stone
+                'images/stone-block.png', // Row 3 of 3 of stone
+                'images/grass-block.png', // Row 1 of 2 of grass
+                'images/grass-block.png' // Row 2 of 2 of grass
             ],
-            numRows = 6, 
-            numCols = 5, 
+            numRows = 6,
+            numCols = 5,
             row, col;
 
         /* Loop through the number of rows and columns we've defined above
@@ -213,12 +231,12 @@ var Engine = (function(global) {
 
         player.render();
 
-        if (level > 1) {
+        if (level > 4) {
             princess.render();
         }
 
-        if (level > 1) {
-            gems.render();               
+        if (level > 2) {
+            gems.render();
         }
 
     }

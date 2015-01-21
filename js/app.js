@@ -2,22 +2,19 @@
  Keep scores, change levels, lose lives and collect Gems. Save Princess.
  Update one level when player reaches water.
  Player loses one life if it collides with the enemy.
- Player gets 500 points for saving the pricess, which means a collision with the princess,
- and both the player and princess together moving as one entity towards the water.
+ Player gets 500 points for saving the pricess, which means a collision with the princess.
  Player gets 10 points for completing a level.
  Player gets 50 points for oollecting gems, which means a collision but with Player not dying, 
  and the gem disappearing.
  The game resets everytime the player collides with an enemy or when it reaches the water.
 */
-
 // Initialize game variables 
-
 var score = 0;
 var lives = 3;
 var level = 0;
 
 // Enemies our player must avoid
-var Enemy = function(x,y,speed) { 
+var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
@@ -38,11 +35,10 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     //this.x = this.x  + (this.speed * dt);
 
-    if(this.x < 505){
-        this.x = this.x +  (this.speed * dt);
-    }
-    else{
-        this.x =- 100;
+    if (this.x < 505) {
+        this.x = this.x + (this.speed * dt);
+    } else {
+        this.x = -100;
     }
 
 }
@@ -63,7 +59,7 @@ var Player = function() {
     // The image/sprite for our players, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/char-boy.png';
-    this.x = 20 + 120*(Math.floor(Math.random()*4)); //randomize x position
+    this.x = 20 + 120 * (Math.floor(Math.random() * 4)); //randomize x position
     this.y = 350;
     this.speed = 10;
 }
@@ -76,7 +72,7 @@ Player.prototype.update = function(dt) {
     // all computers.
     this.x * (dt);
     this.y * (dt);
-   // this.speed * (dt);
+    // this.speed * (dt);
 
     // Reset player when it reaches the water
     if (this.y <= 0) {
@@ -121,8 +117,8 @@ var Princess = function() {
     // The image/sprite for our players, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/char-princess-girl.png';
-    this.x = 20 + 120*(Math.floor(Math.random()*4));
-    this.y = 100 + 50*(Math.floor(Math.random()*4));
+    this.x = 20 + 120 * (Math.floor(Math.random() * 4));
+    this.y = 100 + 50 * (Math.floor(Math.random() * 4));
 }
 
 // Update the princess's position, required method for game
@@ -135,11 +131,17 @@ Princess.prototype.update = function(dt) {
     this.y * (dt);
 }
 
+// Reset the princess she collides with the enemies.
+Princess.prototype.reset = function() {
+    this.x = 20 + 120 * (Math.floor(Math.random() * 4));
+    this.y = 100 + 50 * (Math.floor(Math.random() * 4));
+}
+
 // Draw the princess on the screen, required method for game
 Princess.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
-// End draw the Princess
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+    // End draw the Princess
 
 // Draw the Gems
 
@@ -150,8 +152,8 @@ var Gems = function() {
     // The image/sprite for our players, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/Gem Orange.png';
-    this.x = 20 + 120*(Math.floor(Math.random()*4));
-    this.y = 100 + 50*(Math.floor(Math.random()*4));
+    this.x = 20 + 120 * (Math.floor(Math.random() * 4));
+    this.y = 100 + 50 * (Math.floor(Math.random() * 4));
 }
 
 // Update the gems's position, required method for game
@@ -166,9 +168,9 @@ Gems.prototype.update = function(dt) {
 
 // Draw the gems on the screen, required method for game
 Gems.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
-// End draw Gems
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+    // End draw Gems
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -178,10 +180,10 @@ var player = new Player();
 var princess = new Princess();
 var gems = new Gems();
 
-var Darth = new Enemy(-100,60,250); 
-var Vader = new Enemy(-100,180,400);
-var Joker = new Enemy(-100,240,150);
-var Specter = new Enemy(-100,120,300);
+var Darth = new Enemy(-100, 60, 250);
+var Vader = new Enemy(-100, 180, 400);
+var Joker = new Enemy(-100, 240, 150);
+var Specter = new Enemy(-100, 120, 300);
 allEnemies = [Darth, Vader, Joker, Specter];
 
 
@@ -203,16 +205,11 @@ document.addEventListener('keyup', function(e) {
 Player.prototype.handleInput = function(key) {
     if (key === 'left' && this.x > 0) {
         this.x -= 101;
-    }
-
-    else if (key === 'right' && this.x < 395) {
+    } else if (key === 'right' && this.x < 395) {
         this.x += 101;
-    }
-    else if (key === 'up' && this.y > 0) {
+    } else if (key === 'up' && this.y > 0) {
         this.y -= 83;
-    }
-
-    else if (key === 'down' && this. y < 400) {
+    } else if (key === 'down' && this.y < 400) {
         this.y += 83;
     }
 }
